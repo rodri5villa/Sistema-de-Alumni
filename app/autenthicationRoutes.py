@@ -81,8 +81,6 @@ def update_user(id):
 
     # Crear un diccionario con los campos actualizados
     updated_data = {}
-    if "name" in data:
-        updated_data["name"] = data["name"]
     if "email" in data:
         # Verificar que el nuevo correo no esté en uso por otro usuario
         if mongo.db.users.find_one({"email": data["email"], "_id": {"$ne": ObjectId(id)}}):
