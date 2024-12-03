@@ -22,9 +22,12 @@ jwt = JWTManager(app)
 
 # Importar los Blueprints de autenticación y gestión de trabajos
 from app.autenthicationRoutes import auth_bp  
-from app.jobRoutes import jobs_bp  
+from app.jobRoutes import jobs_bp 
+from app.userRoutes import user_bp 
 
 # Registrar el Blueprint de autenticación con el prefijo "/auth"
 app.register_blueprint(auth_bp, url_prefix="/auth")
+# Registrar el Blueprint de autenticación con el prefijo "/auth"
+app.register_blueprint(user_bp, url_prefix="/users")
 # Registrar el Blueprint de ofertas de trabajo con el prefijo "/jobs"
 app.register_blueprint(jobs_bp, url_prefix="/jobs")
