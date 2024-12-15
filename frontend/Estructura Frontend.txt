@@ -1,0 +1,20 @@
+src/
+├── components/
+│   ├── Header.jsx               # Barra de navegación reutilizable para ciertas páginas.
+│   ├── Footer.jsx               # Pie de página reutilizable.
+│   ├── TokenDisplay.jsx         # Componente para mostrar el token en la página de usuario.
+├── pages/
+│   ├── Home.jsx                 # Página inicial con opciones de "Iniciar sesión" y "Registrarse".
+│   ├── Register.jsx             # Página para registrar un usuario.
+│   ├── Login.jsx                # Página para iniciar sesión.
+│   ├── UserDashboard.jsx        # Página principal después del login, con opciones de gestión.
+│   ├── JobList.jsx              # Página para listar las ofertas de trabajo.
+│   ├── JobCreate.jsx            # Página para crear una nueva oferta de trabajo.
+│   ├── JobUpdate.jsx            # Página para actualizar una oferta existente.
+│   ├── JobDelete.jsx            # Página para borrar una oferta de trabajo.
+│   ├── UserUpdate.jsx           # Página para actualizar los datos del usuario.
+│   ├── UserDelete.jsx           # Página para eliminar el usuario.
+│   ├── UserList.jsx             # Página para listar todos los usuarios.
+├── App.jsx                      # Configuración principal de las rutas.
+├── main.jsx                     # Archivo principal que renderiza la aplicación.
+├── index.css                    # Estilos globales con Tailwind.

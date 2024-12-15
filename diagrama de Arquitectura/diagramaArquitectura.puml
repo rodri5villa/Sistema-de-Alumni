@@ -1,0 +1,75 @@
+@startuml SistemaAlumniArchitecture
+
+left to right direction
+
+package "Frontend (React.js)" {
+    component "Home.jsx" as Home
+    component "Login.jsx" as Login
+    component "Register.jsx" as Register
+    component "JobDashboard.jsx" as Dashboard
+    package "Components" {
+        component "JobForm.jsx" as JobForm
+        component "JobList.jsx" as JobList
+        component "UserActions.jsx" as UserActions
+        component "BackToHomeButton.jsx" as BackToHome
+        component "LogoutButton.jsx" as LogoutButton
+    }
+}
+
+package "Backend (Flask API)" {
+    component "__init__.py" as Init
+    component "authenticationRoutes.py" as AuthRoutes
+    component "jobRoutes.py" as JobRoutes
+    component "userRoutes.py" as UserRoutes
+    component "utils.py (Hashing)" as Utils
+    component "run.py" as Run
+}
+
+package "Database (MongoDB)" {
+    database "users" as UsersDB
+    database "jobs" as JobsDB
+}
+
+package "JWT Authentication" {
+    component "JWT" as JWT
+}
+
+package "Entorno de Ejecución" {
+    component "Anaconda" as Anaconda
+}
+
+' Relaciones dentro del Frontend
+Home --> Login : "Ir a Login"
+Home --> Register : "Ir a Register"
+Login --> Home : "BackToHomeButton"
+Register --> Home : "BackToHomeButton"
+Login --> Dashboard : "Redirección a Dashboard"
+Dashboard <-- JobForm : "Formulario de Empleo"
+Dashboard <-- JobList : "Lista y Edicción de Empleos"
+Dashboard <-- UserActions : "Acciones del Usuario"
+Dashboard --> Home : "LogoutButton"
+
+' Relaciones entre Frontend y Backend
+Login --> AuthRoutes : "Login"
+Register --> AuthRoutes : "Register"
+Dashboard --> JobRoutes : "CRUD Jobs"
+Dashboard --> UserRoutes : "Update/Delete User"
+
+' Relaciones dentro del Backend
+AuthRoutes --> Init : "import"
+JobRoutes --> Init : "import"
+UserRoutes --> Init : "import"
+Utils --> AuthRoutes : "import"
+Utils --> UserRoutes : "import"
+Init --> Run
+
+' Relaciones entre Backend y DB
+AuthRoutes --> UsersDB : "Guardar datos de usuario"
+AuthRoutes --> JWT : "Generar Token"
+JobRoutes --> JobsDB : "CRUD datos de trabajos"
+UserRoutes --> UsersDB : "Actualizar/Eliminar usuarios"
+
+' Ejecución del Backend
+Run --> Anaconda : "Ejecutar el Servidor"
+
+@enduml
