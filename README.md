@@ -1,13 +1,12 @@
-# Sistema Alumni
+# Sistema de Alumni
 
 ## Descripción General
 
-El **Sistema Alumni** es una plataforma web que permite:
-- Registro e inicio de sesión de usuarios.
+El **Sistema de Alumni** es una plataforma web que permite:
+- Registro e inicio de sesión de usuarios, utilizando **JWT** asegurando que cada usuario pueda interactuar con sus datos de forma segura.
+- Actualización y eliminación de los propios usuarios.
 - Creación, edición y eliminación de ofertas de empleo.
-- Filtrado avanzado entre tus propias ofertas o las de todos los usuarios. Además de poder filtrar por título, compañía y ubicación.
-
-El proyecto utiliza **JWT** para la autenticación y manejo de permisos, asegurando que cada usuario pueda interactuar con sus datos de forma segura.
+- Listado y filtrado entre tus propias ofertas o las de todos los usuarios.
 
 ---
 
@@ -22,11 +21,11 @@ El proyecto utiliza **JWT** para la autenticación y manejo de permisos, asegura
 - **CORS**: Permite solicitudes entre dominios (Cross-Origin Resource Sharing).
 - **load_dotenv**: Carga de variables de entorno desde archivos `.env`.
 - **Werkzeug Security**: Para hashing y verificación de contraseñas.
-- **ObjectId**: Identificadores únicos para documentos en MongoDB.
 - **Blueprint**: Organización modular de rutas en Flask.
 
 ### Frontend:
 - **React.js**: Biblioteca para interfaces de usuario.
+- **Vite**: Herramienta rápida y moderna para construir proyectos frontend con React.
 - **Tailwind CSS**: Framework de CSS para un diseño responsivo.
 
 ### Base de Datos:
@@ -40,20 +39,21 @@ El proyecto utiliza **JWT** para la autenticación y manejo de permisos, asegura
 
 ```plaintext
 ├── backend                           
-│   ├── app                           # Carpeta con la lógica principal del backend
-│   │   ├── __init__.py               # Configuración inicial de Flask
-│   │   ├── authenticationRoutes.py   # Rutas para login y registro
-│   │   ├── jobRoutes.py              # Rutas para gestionar ofertas de empleo
-│   │   ├── userRoutes.py             # Rutas para gestión de usuarios
-│   │   ├── models.py                 # Clases de usuario y ofertas
-│   │   ├── utils.py                  # Funciones auxiliares de cifrado y verificación
-│   ├── .env                          # Variables de entorno (MongoDB, JWT secret)
-│   ├── requirements.txt              # Dependencias de Python
+│   ├── app                             # Carpeta con la lógica principal del backend
+│   │   ├── __init__.py                 # Configuración inicial de Flask
+│   │   ├── authenticationRoutes.py     # Rutas para login y registro
+│   │   ├── jobRoutes.py                # Rutas para gestionar ofertas de empleo
+│   │   ├── userRoutes.py               # Rutas para gestión de usuarios
+│   │   ├── models.py                   # Clases de usuario y ofertas
+│   │   ├── utils.py                    # Funciones auxiliares de cifrado y verificación
+│   ├── .env                            # Variables de entorno (MongoDB, JWT secret)
+│   ├── requirements.txt                # Dependencias de Python
+│   ├── run.py                          # Archivo para ejecutar el backend
 ```
 
 ### Endpoints Principales:
 
-#### Usuarios
+#### Autenticación de Usuario
 - `POST /auth/register`: Registrar usuario.
 - `POST /auth/login`: Iniciar sesión.
 
@@ -63,8 +63,8 @@ El proyecto utiliza **JWT** para la autenticación y manejo de permisos, asegura
 - `PUT /jobs/:id`: Actualizar oferta.
 - `DELETE /jobs/:id`: Eliminar oferta.
 
-#### Gestión de Usuario
-- `PUT /users/:id`: Editar perfil.
+#### Usuarios
+- `PUT /users/:id`: Actualizar usuario.
 - `DELETE /users/:id`: Eliminar usuario.
 
 ---
@@ -88,15 +88,17 @@ El proyecto utiliza **JWT** para la autenticación y manejo de permisos, asegura
 │   │   │   ├── Home.jsx                # Página principal
 │   │   │   ├── Login.jsx               # Página de inicio de sesión
 │   │   │   ├── Register.jsx            # Página de registro
-│   │   │   ├── JobDashboard.jsx        # Panel de administración de ofertas
-│   ├── public                          # Archivos estáticos públicos
+│   │   │   ├── JobDashboard.jsx        # Panel de administración de ofertas y usuario
+│   |   ├── App.jsx                     # Configuración principal de las rutas
+│   │   ├── index.css                   # Estilos globales con Tailwind
+│   ├── tailwind.config.js              # Configuracioón de Tailwind   
 │   ├── vite.config.js                  # Configuración de Vite
 └── README.md                           # Documentación del proyecto
 ```
 
 ---
 
-## Base de Datos `alumni_system`
+## Base de Datos en MongoDB `alumni_system`
 
 ### Modelo de Datos:
 
