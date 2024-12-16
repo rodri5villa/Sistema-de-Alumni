@@ -10,6 +10,7 @@ export default function Register() {
     password: "",
   });
 
+  // Actualiza los valores introducidos
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };

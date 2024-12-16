@@ -1,6 +1,7 @@
 export default function JobList({ jobs, onEdit, onDelete }) {
   const userId = localStorage.getItem("userId");
 
+  // Función que maneja la eliminación de un trabajo.
   const handleDelete = (job) => {
     const confirmation = prompt(
       "Escribe 'eliminar' para confirmar la eliminación de esta oferta"
@@ -15,6 +16,7 @@ export default function JobList({ jobs, onEdit, onDelete }) {
 
   return (
     <div className="overflow-auto w-full p-6 bg-gray-100 rounded-lg shadow-inner">
+      {/*Itera sobre los jobs*/}
       {jobs.map((job, index) => (
         <div
           key={job._id || index}
@@ -34,6 +36,7 @@ export default function JobList({ jobs, onEdit, onDelete }) {
             <span className="font-semibold text-gray-800">Sueldo:</span>{" "}
             {job.price ? `${job.price} €` : "Sin especificar"}
           </p>
+          {/*Los botones Editar y Eliminar solo se muestran en los trabajos del usuario que inicia sesión*/}
           {job.created_by === userId && (
             <div className="flex space-x-4">
               <button

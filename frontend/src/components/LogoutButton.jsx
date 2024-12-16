@@ -5,8 +5,8 @@ export default function LogoutButton() {
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    localStorage.clear(); // Limpiar almacenamiento local
-    navigate("/"); // Redirigir a la página de inicio de sesión
+    localStorage.clear();
+    navigate("/"); 
   };
 
   return (

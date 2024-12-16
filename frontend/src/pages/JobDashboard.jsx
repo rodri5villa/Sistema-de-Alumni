@@ -27,7 +27,7 @@ export default function JobDashboard() {
     });
     const data = await response.json();
     setJobs(data);
-    filterJobs(data, filters, showUserJobs); // Filtrar inmediatamente después de cargar
+    filterJobs(data, filters, showUserJobs);
   };
 
   // Para cargar las ofertas cuando se monta el componente
@@ -44,7 +44,7 @@ export default function JobDashboard() {
 
       // Aplicar filtros activos
       return Object.entries(activeFilters).every(([key, value]) => {
-        if (!value) return true; // Si no hay valor en el filtro, incluir
+        if (!value) return true; 
         return job[key]?.toLowerCase().includes(value.toLowerCase());
       });
     });
@@ -56,14 +56,14 @@ export default function JobDashboard() {
     const { name, value } = e.target;
     const updatedFilters = { ...filters, [name]: value };
     setFilters(updatedFilters);
-    filterJobs(jobs, updatedFilters, showUserJobs); // Filtrar al cambiar filtros
+    filterJobs(jobs, updatedFilters, showUserJobs);
   };
 
   // Alternar entre "Mis Ofertas" y "Todas las Ofertas"
   const toggleUserJobs = () => {
     const newShowUserJobs = !showUserJobs;
     setShowUserJobs(newShowUserJobs);
-    filterJobs(jobs, filters, newShowUserJobs); // Filtrar al alternar entre "Mis Ofertas" y "Todas las Ofertas"
+    filterJobs(jobs, filters, newShowUserJobs);
   };
 
   // Manejar la creación de una nueva oferta
@@ -112,7 +112,6 @@ export default function JobDashboard() {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-blue-100 to-gray-200 p-8">
-      {/* Encabezado */}
       <div className="bg-white shadow-lg rounded-lg p-6 mb-8 flex items-center">
         <h1 className="text-5xl font-extrabold text-gray-800 text-center flex-grow">
           Sistema de <span className="text-blue-500">Ofertas de Empleo</span>
@@ -122,10 +121,7 @@ export default function JobDashboard() {
           <LogoutButton />
         </div>
       </div>
-
-      {/* Contenedor de lista, filtros y botón */}
       <div className="bg-white shadow-md rounded-lg p-6">
-        {/* Botón y Título */}
         <div className="flex justify-between items-center mb-6">
           <button
             onClick={handleCreate}
@@ -137,8 +133,6 @@ export default function JobDashboard() {
             Lista de Ofertas
           </h2>
         </div>
-
-        {/* Filtros */}
         <div className="mb-6">
           <JobFilters
             filteredJobs={filteredJobs}
@@ -148,12 +142,8 @@ export default function JobDashboard() {
             showUserJobs={showUserJobs}
           />
         </div>
-
-        {/* Lista de Trabajos */}
         <JobList jobs={filteredJobs} onEdit={handleEdit} onDelete={handleDelete} />
       </div>
-
-      {/* Formulario */}
       {isFormOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
           <div className="bg-white shadow-lg rounded-lg p-8 max-w-md w-full">

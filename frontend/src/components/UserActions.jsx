@@ -4,6 +4,7 @@ export default function UserActions() {
   const userId = localStorage.getItem("userId");
   const token = localStorage.getItem("token");
 
+  // Función para la actualización de datos del usuario.
   const handleUpdateUser = async () => {
     const updatedEmail = prompt("Introduce el nuevo email del usuario:");
     const updatedPassword = prompt("Introduce la nueva contraseña:");
@@ -33,6 +34,7 @@ export default function UserActions() {
     }
   };
 
+  // Función para la eliminación del usuario.
   const handleDeleteUser = async () => {
     const confirmation = prompt(
       "Escribe 'eliminar' para confirmar la eliminación de tu usuario:"
@@ -51,7 +53,7 @@ export default function UserActions() {
       if (!response.ok) throw new Error("Error al eliminar el usuario.");
       alert("Usuario eliminado exitosamente.");
       localStorage.clear(); // Limpiar datos del usuario
-      window.location.href = "/"; // Redirigir al inicio de sesión
+      window.location.href = "/"; // Redirigir a Home
     } catch (error) {
       alert("Error al eliminar el usuario.");
     }

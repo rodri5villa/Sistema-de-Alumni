@@ -2,13 +2,16 @@ import React, { useState } from "react";
 
 export default function JobForm({ job, onClose, onSave }) {
   const [formData, setFormData] = useState(
+    // Si existe un trabajo (job), usa sus valores; sino, usa valores por defecto.
     job || { title: "", description: "", company: "", location: "Oficina", price: "" }
   );
 
+  // Función para actualizar los cambios en los campos del formulario.
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  // Función para el envío del formulario.
   const handleSubmit = async (e) => {
     e.preventDefault();
     const token = localStorage.getItem("token");
@@ -30,7 +33,7 @@ export default function JobForm({ job, onClose, onSave }) {
         const errorData = await response.json();
         throw new Error(errorData.message || "Error al guardar la oferta.");
       }
-
+      
       const data = await response.json();
       onSave(data);
     } catch (error) {
