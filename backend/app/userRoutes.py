@@ -13,14 +13,11 @@ def update_user(id):
     # Obtener el ID del usuario autenticado
     user_id = get_jwt_identity()
 
-    # Verificar que el usuario autenticado coincide con el usuario que se desea actualizar
     if user_id != id:
         return jsonify({"message": "No tienes permisos para actualizar este usuario"}), 403
 
-    # Extraer los datos enviados en la solicitud
     data = request.json
 
-    # Crear un diccionario con los campos actualizados
     updated_data = {}
     if "email" in data:
         if mongo.db.users.find_one({"email": data["email"], "_id": {"$ne": ObjectId(id)}}):
@@ -29,7 +26,6 @@ def update_user(id):
     if "password" in data:
         updated_data["password"] = hash_password(data["password"])
 
-    # Actualizar el usuario en la base de datos
     mongo.db.users.update_one({"_id": ObjectId(id)}, {"$set": updated_data})
     return jsonify({"message": "Usuario actualizado exitosamente"}), 200
 

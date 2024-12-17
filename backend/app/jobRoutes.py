@@ -25,7 +25,7 @@ def create_job():
         "price": data["price"],          
         "created_by":  user_id    
     }
-    # Insertar el documento en la colección "jobs"
+  
     mongo.db.jobs.insert_one(job)
     return jsonify({"message": "Oferta creada exitosamente"}), 201
 
@@ -66,7 +66,6 @@ def update_job(id):
     if "price" in data:
         updated_data["price"] = data["price"]  
 
-    # Actualizar la oferta en la base de datos
     mongo.db.jobs.update_one({"_id": ObjectId(id)}, {"$set": updated_data})
     return jsonify({"message": "Oferta actualizada exitosamente"}), 200
 
